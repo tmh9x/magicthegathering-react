@@ -5,7 +5,7 @@ import "./Card.css";
 
 function Card(character) {
   return (
-    <div className="card-container">
+    <div key={character.props.multiverseid} className="card-container">
       <div className="card-container-img">
         {character.props.imageUrl ? (
           <Link to={`${character.props.multiverseid}`}>
