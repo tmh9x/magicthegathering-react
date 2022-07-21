@@ -1,4 +1,12 @@
-.search {
-  text-align: center;
+.characters-container {
+  display: grid;
+  justify-items: center;
+}
+
+.pagination {
   margin-bottom: 1em;
+}
+
+.search {
+  margin-bottom: 1.5em;
 }

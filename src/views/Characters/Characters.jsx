@@ -3,18 +3,24 @@ import { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Card from "../../components/Card/Card";
 import Autocomplete from "@mui/material/Autocomplete";
-import { Button } from "@mui/material";
+import Pagination from "@mui/material/Pagination";
 import "./Characters.css";
 
 function Characters() {
   const [characters, setCharacters] = useState([]);
   const [input, setInput] = useState("");
+  const [page, setPage] = useState(1);
 
-  const getCharacters = async () => {
+  console.log("page", page);
+
+  const getCharacters = async (page) => {
     try {
-      const response = await fetch(`https://api.magicthegathering.io/v1/cards`);
+      const response = await fetch(
+        `https://api.magicthegathering.io/v1/cards?page=${page}`
+      );
       const results = await response.json();
       console.log("results", results.cards);
+      console.log("results", results);
       setCharacters(results.cards);
     } catch (error) {
       console.log(error);
@@ -49,40 +55,59 @@ function Characters() {
         uniqueCharacter.name.toLowerCase().includes(input.toLowerCase())
       );
 
+  const handleChange = (page) => {
+    console.log("page", page);
+    setPage(page);
+  };
+
   useEffect(() => {
-    getCharacters();
-  }, []);
+    getCharacters(page);
+  }, [page]);
 
   if (!uniqueCharacters) {
     return <div>Characters not found</div>;
   }
 
   return (
-    <>
-      <Autocomplete
-        freeSolo
-        id="free-solo-2-demo"
-        className="search"
-        onChange={getInput}
-        disableClearable
-        options={uniqueCharacters.map((character) => character.name)}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Search input"
-            sx={{ width: 300 }}
-            InputProps={{
-              ...params.InputProps,
-              type: "search",
-            }}
-          />
-        )}
-      />
-      {uniqueCharacters &&
-        filteredResults.map((character) => (
+    <div className="characters-container">
+      <div>
+        <Pagination
+          className="pagination"
+          count={10}
+          onChange={(event, page) => handleChange(page)}
+          page={page}
+          size="normal"
+        />
+      </div>
+
+      <div>
+        <Autocomplete
+          freeSolo
+          id="free-solo-2-demo"
+          className="search"
+          onChange={getInput}
+          disableClearable
+          options={uniqueCharacters.map((character) => character.name)}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Search input"
+              sx={{ width: 300 }}
+              InputProps={{
+                ...params.InputProps,
+                type: "search",
+              }}
+            />
+          )}
+        />
+      </div>
+
+      <div>
+        {filteredResults.map((character) => (
           <Card key={character.multiverseid} props={character} />
         ))}
-    </>
+      </div>
+    </div>
   );
 }
 
