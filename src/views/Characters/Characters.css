@@ -3,10 +3,12 @@
   justify-items: center;
 }
 
-.pagination {
-  margin-bottom: 1em;
+.search-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.search {
-  margin-bottom: 1.5em;
+.pagination {
+  margin-bottom: 1em;
 }

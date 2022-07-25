@@ -5,6 +5,7 @@ import Card from "../../components/Card/Card";
 import Autocomplete from "@mui/material/Autocomplete";
 import Pagination from "@mui/material/Pagination";
 import "./Characters.css";
+import ClearFilterButton from "../../components/ClearFilterButton/ClearFilterButton";
 
 function Characters() {
   const [characters, setCharacters] = useState([]);
@@ -60,6 +61,10 @@ function Characters() {
     setPage(page);
   };
 
+  const clearFilter = () => {
+    setInput("");
+  };
+
   useEffect(() => {
     getCharacters(page);
   }, [page]);
@@ -80,26 +85,32 @@ function Characters() {
         />
       </div>
 
-      <div>
-        <Autocomplete
-          freeSolo
-          id="free-solo-2-demo"
-          className="search"
-          onChange={getInput}
-          disableClearable
-          options={uniqueCharacters.map((character) => character.name)}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Search input"
-              sx={{ width: 300 }}
-              InputProps={{
-                ...params.InputProps,
-                type: "search",
-              }}
-            />
-          )}
-        />
+      <div className="search-container">
+        <div>
+          <Autocomplete
+            freeSolo
+            id="free-solo-2-demo"
+            className="search"
+            onChange={getInput}
+            disableClearable
+            options={uniqueCharacters.map((character) => character.name)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Search input"
+                sx={{ width: 300 }}
+                InputProps={{
+                  ...params.InputProps,
+                  type: "search",
+                }}
+              />
+            )}
+          />
+        </div>
+
+        <div>
+          <ClearFilterButton clearFilter={clearFilter} />
+        </div>
       </div>
 
       <div>
