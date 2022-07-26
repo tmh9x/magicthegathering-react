@@ -1,20 +1,25 @@
-import Characters from "./views/Characters/Characters";
-import ButtonAppBar from "./components/ButtonAppBar/ButtonAppBar";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
-import CharacterDetails from "./views/CharacterDetails/CharacterDetails";
 
-function App() {
+import { Route, Routes } from "react-router-dom";
+
+import CharacterDetails from "./views/CharacterDetails/CharacterDetails";
+import Characters from "./views/Characters/Characters";
+import { CharactersContextProvider } from "./contexts/charactersContext";
+import Login from "./views/Login/Login";
+import NavBar from "./components/NavBar/NavBar";
+
+export default function App() {
   return (
     <div className="App">
-      <ButtonAppBar />
-      <Routes>
-        <Route path="/" element={<Characters />} />
-        <Route path=":id" element={<CharacterDetails />} />
-        <Route path="*" element={<h1>Route does not exist</h1>} />
-      </Routes>
+      <NavBar />
+      <CharactersContextProvider>
+        <Routes>
+          <Route path="/" element={<Characters />} />
+          <Route path=":id" element={<CharacterDetails />} />
+          <Route path="login" element={<Login />} />
+          <Route path="*" element={<h1>Route does not exist</h1>} />
+        </Routes>
+      </CharactersContextProvider>
     </div>
   );
 }
-
-export default App;

@@ -1,15 +1,23 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import NoImage from "../../assets/no-image.png";
 import "./Card.css";
 
-function Card(character) {
+import { Link } from "react-router-dom";
+import NoImage from "../../assets/no-image.png";
+import React from "react";
+
+export default function Card(props) {
+  const multiverseid = props.character.multiverseid;
+  const imageUrl = props.character.imageUrl;
+  const name = props.character.name;
+  const type = props.character.type;
+  const toughness = props.character.toughness;
+  const manaCost = props.character.manaCost;
+
   return (
-    <div key={character.props.multiverseid} className="card-container">
+    <div key={multiverseid} className="card-container">
       <div className="card-container-img">
-        {character.props.imageUrl ? (
-          <Link to={`${character.props.multiverseid}`}>
-            <img src={character.props.imageUrl} alt="" />
+        {imageUrl ? (
+          <Link to={`${multiverseid}`}>
+            <img src={imageUrl} alt="" />
           </Link>
         ) : (
           <div>
@@ -19,23 +27,21 @@ function Card(character) {
       </div>
       <div className="card-container-text">
         <div>
-          <h2>{character.props.name}</h2>
+          <h2>{name}</h2>
         </div>
         <div>
           <span className="bold">Type: </span>
-          {character.props.type}
+          {type}
         </div>
         <div>
           <span className="bold">Toughness: </span>
-          {character.props.toughness}
+          {toughness}
         </div>
         <div>
           <span className="bold">Mana Cost: </span>
-          {character.props.manaCost}
+          {manaCost}
         </div>
       </div>
     </div>
   );
 }
-
-export default Card;

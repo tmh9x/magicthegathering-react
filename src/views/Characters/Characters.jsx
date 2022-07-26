@@ -1,35 +1,20 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import TextField from "@mui/material/TextField";
-import Card from "../../components/Card/Card";
-import Autocomplete from "@mui/material/Autocomplete";
-import Pagination from "@mui/material/Pagination";
 import "./Characters.css";
-import ClearFilterButton from "../../components/ClearFilterButton/ClearFilterButton";
 
-function Characters() {
-  const [characters, setCharacters] = useState([]);
+import React, { useContext } from "react";
+import { useEffect, useState } from "react";
+
+import Autocomplete from "@mui/material/Autocomplete";
+import Card from "../../components/Card/Card";
+import ClearFilterButton from "../../components/ClearFilterButton/ClearFilterButton";
+import Pagination from "@mui/material/Pagination";
+import TextField from "@mui/material/TextField";
+import { charactersContext } from "../../contexts/charactersContext";
+
+export default function Characters() {
+  const { characters, getCharacters } = useContext(charactersContext);
+
   const [input, setInput] = useState("");
   const [page, setPage] = useState(1);
-
-  console.log("page", page);
-
-  const getCharacters = async (page) => {
-    try {
-      const response = await fetch(
-        `https://api.magicthegathering.io/v1/cards?page=${page}`
-      );
-      const results = await response.json();
-      console.log("results", results.cards);
-      console.log("results", results);
-      setCharacters(results.cards);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  console.log("characters", characters);
-  console.log("characters", typeof characters);
 
   const uniqueNames = [];
 
@@ -114,12 +99,11 @@ function Characters() {
       </div>
 
       <div>
-        {filteredResults.map((character) => (
-          <Card key={character.multiverseid} props={character} />
-        ))}
+        {filteredResults &&
+          filteredResults.map((character) => (
+            <Card key={character.multiverseid} character={character} />
+          ))}
       </div>
     </div>
   );
 }
-
-export default Characters;
