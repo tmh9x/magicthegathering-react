@@ -1,21 +1,24 @@
-import React from "react";
+import "./CharactersDetails.css";
+
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { styled } from "@mui/material/styles";
+import { useNavigate, useParams } from "react-router-dom";
+
+import BackButton from "../../components/BackButton/BackButton";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import "./CharactersDetails.css";
+import React from "react";
+import ShareIcon from "@mui/icons-material/Share";
+import Typography from "@mui/material/Typography";
+import { styled } from "@mui/material/styles";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -28,7 +31,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-function CharacterDetails() {
+export default function CharacterDetails() {
   const [charactersDetails, setCharactersDetails] = useState();
   const [expanded, setExpanded] = useState(false);
 
@@ -70,11 +73,7 @@ function CharacterDetails() {
       {charactersDetails && (
         <Card className="details-container" sx={{ maxWidth: 345 }}>
           <CardHeader
-            avatar={
-              <Button color="error" variant="outlined" onClick={handleClick}>
-                Back
-              </Button>
-            }
+            avatar={<BackButton />}
             action={
               <IconButton aria-label="settings">
                 <MoreVertIcon />
@@ -92,11 +91,7 @@ function CharacterDetails() {
               alt="Paella dish"
             />
           </div>
-          <CardContent>
-            <Typography variant="body2" color="text.secondary">
-              {charactersDetails.text}
-            </Typography>
-          </CardContent>
+
           <CardActions disableSpacing>
             <IconButton aria-label="add to favorites">
               <FavoriteIcon />
@@ -126,6 +121,12 @@ function CharacterDetails() {
             unmountOnExit
           >
             <CardContent>
+              <div className="details-text">
+                <Typography variant="body2" color="text.secondary">
+                  {charactersDetails.text}
+                </Typography>
+              </div>
+
               <Typography paragraph>
                 <span className="uppercase">Power: </span>
                 {charactersDetails.power}
@@ -145,30 +146,3 @@ function CharacterDetails() {
     </>
   );
 }
-
-export default CharacterDetails;
-
-/* <>
-    {charactersDetails && (
-      <div className="details-container">
-        <div>
-          <img src={charactersDetails.card.imageUrl} alt="" />
-        </div>
-        <div>
-          <p>{charactersDetails.card.name}</p>
-        </div>
-        <div>
-          <p>{charactersDetails.card.manaCost}</p>
-        </div>
-        <div>
-          <p>{charactersDetails.card.power}</p>
-        </div>
-        <div>
-          <p>{charactersDetails.card.rarity}</p>
-        </div>
-        <div>
-          <p>{charactersDetails.card.text}</p>
-        </div>
-      </div>
-    )}
-  </> */

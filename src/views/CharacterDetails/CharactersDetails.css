@@ -5,6 +5,10 @@
   margin-bottom: 1em;
 }
 
+.details-text {
+  margin-bottom: 1em;
+}
+
 .uppercase {
   text-transform: uppercase;
 }

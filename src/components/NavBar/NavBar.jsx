@@ -1,15 +1,19 @@
+import "./NavBar.css";
+
 import * as React from "react";
+
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import "./ButtonAppBar.css";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
 
-export default function ButtonAppBar() {
+export default function NavBar() {
   const darkTheme = createTheme({
     palette: {
       mode: "dark",
@@ -18,6 +22,11 @@ export default function ButtonAppBar() {
       },
     },
   });
+
+  let navigate = useNavigate();
+  const handleClick = () => {
+    navigate("login");
+  };
 
   return (
     <Box className="button-app-bar" sx={{ flexGrow: 1 }}>
@@ -36,7 +45,9 @@ export default function ButtonAppBar() {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Magic the Gathering
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit" onClick={handleClick}>
+              Login
+            </Button>
           </Toolbar>
         </AppBar>
       </ThemeProvider>
