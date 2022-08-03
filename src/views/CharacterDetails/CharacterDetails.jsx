@@ -3,8 +3,6 @@ import "./CharactersDetails.css";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import BackButton from "../../components/BackButton/BackButton";
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -14,7 +12,6 @@ import Collapse from "@mui/material/Collapse";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import React from "react";
 import ShareIcon from "@mui/icons-material/Share";
 import Typography from "@mui/material/Typography";
@@ -73,12 +70,6 @@ export default function CharacterDetails() {
       {charactersDetails && (
         <Card className="details-container" sx={{ maxWidth: 345 }}>
           <CardHeader
-            avatar={<BackButton />}
-            action={
-              <IconButton aria-label="settings">
-                <MoreVertIcon />
-              </IconButton>
-            }
             title={charactersDetails.name}
             subheader={charactersDetails.type}
           />
@@ -88,7 +79,6 @@ export default function CharacterDetails() {
               component="img"
               height="480"
               image={charactersDetails.imageUrl}
-              alt="Paella dish"
             />
           </div>
 
