@@ -73,7 +73,7 @@ export default function Characters() {
       </div>
 
       <div className="search-container">
-        <div>
+        <div className="expand">
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
@@ -90,6 +90,7 @@ export default function Characters() {
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Colors</InputLabel>
                 <Select
+                  sx={{ backgroundColor: "white" }}
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={color}
@@ -109,6 +110,7 @@ export default function Characters() {
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Type</InputLabel>
                 <Select
+                  sx={{ backgroundColor: "white" }}
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={type}
@@ -135,6 +137,7 @@ export default function Characters() {
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Toughness</InputLabel>
                 <Select
+                  sx={{ backgroundColor: "white" }}
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={toughness}

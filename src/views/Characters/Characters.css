@@ -11,10 +11,17 @@
 
 .search-container-collapsed {
   display: flex;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  gap: 0.3em;
   flex-direction: row;
   align-items: center;
 }
 
 .pagination {
+  margin-bottom: 1em;
+}
+
+.expand {
   margin-bottom: 1em;
 }

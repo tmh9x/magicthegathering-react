@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function BackButton() {
   let navigate = useNavigate();
   const handleClick = () => {
-    navigate("/");
+    navigate("/characters");
   };
 
   return (

@@ -1,7 +1,6 @@
 import "./Card.css";
 
 import { Link } from "react-router-dom";
-import NoImage from "../../assets/no-image.png";
 import React from "react";
 
 export default function Card(props) {
@@ -20,8 +19,8 @@ export default function Card(props) {
             <img src={imageUrl} alt="" />
           </Link>
         ) : (
-          <div>
-            <img src={NoImage} alt="" />
+          <div className="no-image">
+            <p>no image availabe</p>
           </div>
         )}
       </div>
