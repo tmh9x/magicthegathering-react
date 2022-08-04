@@ -64,7 +64,13 @@ export default function Characters() {
     <div className="characters-container">
       <div>
         <Pagination
+          sx={{
+            backgroundColor: "rgb(239, 241, 245, 0.5)",
+            padding: "5px",
+            borderRadius: "2em",
+          }}
           className="pagination"
+          variant="outlined"
           count={10}
           onChange={(event, page) => handleChange(page)}
           page={page}

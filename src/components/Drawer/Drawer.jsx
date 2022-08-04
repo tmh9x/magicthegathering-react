@@ -115,14 +115,6 @@ export default function Drawer() {
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
-              <InfoIcon />
-            </ListItemIcon>
-            <Link to="/about">About</Link>
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
               <MailIcon />
             </ListItemIcon>
             <a href="mailto:contact@mtg.com">Contact</a>
