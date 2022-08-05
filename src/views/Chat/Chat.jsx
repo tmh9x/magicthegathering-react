@@ -15,11 +15,13 @@ import {
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import SendIcon from "@mui/icons-material/Send";
 import { authContext } from "../../contexts/authContext";
 import { db } from "../../firebase";
 
 export default function Chat() {
   const { user } = useContext(authContext);
+  console.log("user.email", user.email);
   const [messages, setMessages] = useState(null);
   const [chatMsg, setChatMsg] = useState("");
 
@@ -31,7 +33,17 @@ export default function Chat() {
     return new Date(time * 1000).toLocaleString();
   };
 
-  const handleSendMsg = async (id) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (chatMsg.trim()) {
+      if (e.key === "Enter") {
+        handleSendMsg();
+        setChatMsg("");
+      }
+    }
+  };
+
+  const handleSendMsg = async (e) => {
     const newChatMsg = {
       author: user.email,
       date: new Date(),
@@ -39,6 +51,7 @@ export default function Chat() {
     };
     try {
       const docRef = await addDoc(collection(db, "chat"), newChatMsg);
+      setChatMsg("");
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -57,7 +70,6 @@ export default function Chat() {
 
   const handleDeleteMsg = async (id) => {
     const docRef = await deleteDoc(doc(db, "chat", id));
-    console.log("docRef", docRef.id);
   };
 
   const getMessages = async () => {
@@ -98,22 +110,24 @@ export default function Chat() {
             </div>
             <div className="msg-container-body ">
               <p>{message.data.text}</p>
-              <div className="button-container">
-                <IconButton
-                  variant="contained"
-                  color="success"
-                  onClick={() => handleEditMsg(message.id)}
-                >
-                  <EditIcon />
-                </IconButton>
-                <IconButton
-                  variant="contained"
-                  color="error"
-                  onClick={() => handleDeleteMsg(message.id)}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </div>
+              {user.email === message.data.author && (
+                <div className="button-container">
+                  <IconButton
+                    variant="contained"
+                    color="success"
+                    onClick={() => handleEditMsg(message.id)}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton
+                    variant="contained"
+                    color="error"
+                    onClick={() => handleDeleteMsg(message.id)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </div>
+              )}
             </div>
           </div>
         ))}
@@ -128,13 +142,14 @@ export default function Chat() {
             id="chat"
             value={chatMsg}
             onChange={handleMsg}
+            onKeyUp={handleSubmit}
             fullWidth
-            sx={{ backgroundColor: "white" }}
+            sx={{ backgroundColor: "white", borderRadius: "0.5em" }}
           />
 
-          <Button variant="contained" onClick={handleSendMsg}>
-            Send
-          </Button>
+          <IconButton variant="contained" color="error" onClick={handleSendMsg}>
+            <SendIcon />
+          </IconButton>
         </div>
       </div>
     </div>

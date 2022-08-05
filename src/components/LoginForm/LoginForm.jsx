@@ -39,6 +39,7 @@ export default function LoginForm() {
           type="email"
           onChange={handleEmailChange}
           value={email}
+          required
         />
         <TextField
           id="password"
@@ -47,6 +48,7 @@ export default function LoginForm() {
           type="password"
           onChange={handlePasswordChange}
           value={password}
+          required
         />
         <Button
           type="button"
@@ -63,8 +65,6 @@ export default function LoginForm() {
           </Link>
         </p>
       </div>
-
-      <BackButton />
     </>
   );
 }

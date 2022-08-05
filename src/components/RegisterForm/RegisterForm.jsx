@@ -26,8 +26,8 @@ export default function RegisterForm() {
 
   return (
     <>
-      <h2>Register</h2>
       <div className="register-form-container">
+        <h2>Register</h2>
         <TextField
           id="email"
           label="Email"
@@ -56,8 +56,6 @@ export default function RegisterForm() {
           Register
         </Button>
       </div>
-
-      <BackButton />
     </>
   );
 }

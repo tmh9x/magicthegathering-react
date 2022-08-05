@@ -12,6 +12,10 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 
+.back-button {
+  align-self: center;
+}
+
 .logo {
   grid-column: 2/3;
   text-align: center;
